@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "name": "Task 1",
+    "description": "Task 1 description",
+    "completed": false,
+    "completedPercent": 80
+  },
+  {
+    "id": 2,
+    "name": "Task 2",
+    "description": "Task 2 description",
+    "completed": false,
+    "completedPercent": 90
+  },
+  {
+    "id": 3,
+    "name": "Task 3",
+    "description": "Task 3 description",
+    "completed": true,
+    "completedPercent": 100
+  }
+]

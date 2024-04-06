@@ -1,0 +1,177 @@
+<div class="container-fluid">
+  <!-- <div>
+    <label for="name" class="labelStyle">Task Name: </label>
+    <input
+      id="name"
+      [(ngModel)]="todo.name"
+      (keyup)="onKeyupValue()"
+      placeholder="Enter name"
+      required
+    />
+    <button
+      type="button"
+      class="btn btn-secondary"
+      style="margin-left: 15px"
+      (click)="onClickAdd()"
+    >
+      {{ buttonName }}
+    </button>
+  </div>
+  <div *ngIf="todo.name.length < 1">
+    <small class="errorStyle">Name is required.</small>
+  </div>
+  <div *ngIf="todo.name.length > 0 && todo.name.length < 3">
+    <small class="errorStyle">Name should be of minimum 3 letters.</small>
+  </div>
+  <div *ngIf="isDetailsVisible" class="labelStyle">
+    {{ todo.id }}. {{ todo.name }}
+  </div> -->
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="row m-1">
+            <div class="col-10">
+              <h4 class="card-title mb-4">Task Details</h4>
+            </div>
+            <div class="col-2">
+              <div (click)="addNewTask()">
+                <p-button
+                  class="tableAddButtonStyle"
+                  label="Add New Task"
+                  icon="pi pi-plus"
+                ></p-button>
+              </div>
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="table table-hover table-centered">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Name</th>
+                  <th>Description</th>
+                  <th>Completed Percent</th>
+                  <th>Completed</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let data of taskDetails">
+                  <td>
+                    {{ data?.id }}
+                  </td>
+                  <td>{{ data?.name }}</td>
+                  <td>{{ data?.description }}</td>
+                  <td>
+                    <p-progressBar
+                      [value]="data?.completedPercent"
+                    ></p-progressBar>
+                  </td>
+                  <td
+                    [ngClass]="
+                      data?.completed
+                        ? 'bi bi-check-circle-fill text-success'
+                        : 'bi bi-x-circle-fill text-danger'
+                    "
+                    style="height: 24px; width: 24px"
+                  ></td>
+                  <td>
+                    <i
+                      class="bi bi-pencil-square"
+                      (click)="onClickEdit(data)"
+                      style="margin-right: 10px"
+                    ></i>
+                    <i
+                      class="bi bi-trash"
+                      (click)="onClickDelete(data)"
+                      style="margin-right: 10px"
+                    ></i>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<p-confirmDialog [style]="{ width: '450px' }"></p-confirmDialog>
+<p-dialog
+  [(visible)]="taskDialog"
+  [style]="{ width: '450px' }"
+  header="Task Details New"
+  [modal]="true"
+  styleClass="p-fluid"
+>
+  <ng-template pTemplate="content">
+    <div class="fieldRowClass">
+      <span class="p-float-label" style="width: 100%">
+        <input
+          type="text"
+          pInputText
+          id="float-input"
+          [(ngModel)]="taskModal.name"
+          required
+          autofocus
+        />
+        <label for="float-input" class="inputLabelClass">Name</label>
+      </span>
+      <small class="p-error" *ngIf="submitted && !taskModal.name"
+        >Name is required.</small
+      >
+    </div>
+    <div class="fieldRowClass">
+      <span class="p-float-label" style="width: 100%">
+        <input
+          type="text"
+          pInputText
+          id="float-input"
+          [(ngModel)]="taskModal.description"
+          required
+        />
+        <label for="float-input" class="inputLabelClass">Description</label>
+      </span>
+      <small class="p-error" *ngIf="submitted && !taskModal.description"
+        >Description is required.</small
+      >
+    </div>
+    <div class="fieldRowClass">
+      <label for="completedPercent" class="inputLabelClass"
+        >Completed Percent</label
+      >
+      <p-inputNumber
+        id="completedPercent"
+        [(ngModel)]="taskModal.completedPercent"
+        [useGrouping]="false"
+        [maxlength]="3"
+        [min]="0"
+        [max]="100"
+      ></p-inputNumber>
+
+      <small class="p-error" *ngIf="submitted && !taskModal.completedPercent"
+        >Completed Percent is required.</small
+      >
+    </div>
+  </ng-template>
+  <ng-template pTemplate="footer">
+    <button
+      pButton
+      pRipple
+      label="Cancel"
+      icon="pi pi-times"
+      class="p-button-text"
+      (click)="hideDialog()"
+    ></button>
+    <button
+      pButton
+      pRipple
+      label="Save"
+      icon="pi pi-check"
+      class="p-button-text"
+      (click)="saveTaskDetails()"
+    ></button>
+  </ng-template>
+</p-dialog>

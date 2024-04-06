@@ -1,0 +1,17 @@
+<p style="color: antiquewhite">shopping-cart works!</p>
+<div class="table-responsive">
+  <table class="table table-hover table-centered">
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Price</th>
+    </tr>
+    <tr *ngFor="let data of productDetails">
+      <th>{{ data?.id }}</th>
+      <th>{{ data?.name }}</th>
+      <th>{{ data?.description }}</th>
+      <th>{{ data?.price }}</th>
+    </tr>
+  </table>
+</div>

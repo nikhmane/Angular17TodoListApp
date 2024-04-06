@@ -1,0 +1,18 @@
+.navbar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0;
+  height: 70px;
+  background-color: #272d3e;
+}
+.navbar-brand-style {
+  color: #79859c;
+  font-size: 24px;
+}
+
+.navbar-app-name-style {
+  color: #79859c;
+  font-size: 24px;
+  cursor: pointer;
+}
